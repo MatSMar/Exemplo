@@ -21,13 +21,13 @@ void registerUser() {
 
     char username[MAX_NAME_LENGTH];
     char password[MAX_PASSWORD_LENGTH];
+    char confirmPassword[MAX_PASSWORD_LENGTH];
 
     printf("Digite o nome de usuário: ");
     scanf("%s", username);
 
     // Verifica se o usuário já existe
-    int i;
-    for(i = 0; i < userCount; i++){
+    for (int i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, username) == 0) {
             printf("Nome de usuário já existe.\n");
             return;
@@ -36,6 +36,14 @@ void registerUser() {
 
     printf("Digite a senha: ");
     scanf("%s", password);
+
+    printf("Confirme a senha: ");
+    scanf("%s", confirmPassword);
+
+    if (strcmp(password, confirmPassword) != 0) {
+        printf("As senhas não correspondem. Registro falhou.\n");
+        return;
+    }
 
     // Adiciona o novo usuário
     strcpy(users[userCount].username, username);
@@ -55,8 +63,7 @@ void loginUser() {
     scanf("%s", password);
 
     // Verifica as credenciais
-    int i;
-    for (i = 0; i < userCount; i++) {
+    for (int i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, username) == 0 && strcmp(users[i].password, password) == 0) {
             printf("Login bem-sucedido!\n");
             return;
